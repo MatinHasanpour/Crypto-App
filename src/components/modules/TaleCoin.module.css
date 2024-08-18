@@ -12,11 +12,18 @@
 .table thead {
   border-bottom: 2px solid #fff;
   margin-bottom: 20px;
+  background: #585858;
+}
+.th1 {
+  border-radius: 10px 0px 0px 0 ;
+}.th2 {
+  border-radius: 0px 10px 0px 0px ;
 }
 .table th {
   font-size: 1.2rem;
   text-align: left;
   padding: 10px 0;
+  padding: 10px;
 }
 .table tbody tr {
   height: 80px;
@@ -36,26 +43,37 @@
   margin-right: 10px;
 }
 .symbol span {
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: 500;
+  font-size: 0.8rem;
   color: #9fa6b7;
+}
+.colors {
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+  color: #fff !important;
 }
 
 .success {
-  color: #fff;
-  background-color: #57bc7c;
+  color: rgb(0, 255, 87);
+  background-color: rgba(74, 76, 78, 0.5);
   padding: 10px;
   border: none;
   border-radius: 10px;
   font-size: 0.9rem;
 }
 .error {
-  color: #fff;
-  background-color: #d33636;
+  color: #d33636;
+  background-color: rgba(74, 76, 78, 0.5);
   padding: 10px;
   border: none;
   border-radius: 10px;
   font-size: 0.9rem;
+}
+.priceSuccess {
+  color: #00ff57;
+}
+.priceError {
+  color: #d33636;
 }
 
 @media (max-width: 700px) {

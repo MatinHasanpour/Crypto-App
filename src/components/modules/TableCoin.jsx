@@ -14,12 +14,12 @@ function TableCoin({ coins, isLoading }) {
         <table className={style.table}>
           <thead>
             <tr>
-              <th>Coin</th>
+              <th className={style.th1}>Coin</th>
               <th className={style.name}>Name</th>
               <th>Price</th>
               <th>24h</th>
               <th className={style.total_volume}>Total Volume</th>
-              <th className={style.total}></th>
+              <th className={(style.total, style.th2)}></th>
             </tr>
           </thead>
           <tbody>
@@ -50,11 +50,16 @@ const TableRow = ({
       <td>
         <div className={style.symbol}>
           <img src={image} alt="" />
-          <span>{symbol.toUpperCase()}</span>
+          <span>
+            <span className={style.colors}>{symbol.toUpperCase()}</span>/USDT
+          </span>
         </div>
       </td>
       <td className={style.name}> {name} </td>
-      <td> ${current_price.toLocaleString()} </td>
+      <td className={price_change > 0 ? style.priceSuccess : style.priceError}>
+        {" "}
+        ${current_price.toLocaleString()}{" "}
+      </td>
       <td>
         <button className={price_change > 0 ? style.success : style.error}>
           {price_change.toFixed(2)}%
