@@ -14,10 +14,12 @@
   margin-bottom: 20px;
   background: #585858;
 }
+
 .th1 {
-  border-radius: 10px 0px 0px 0 ;
-}.th2 {
-  border-radius: 0px 10px 0px 0px ;
+  border-radius: 10px 0px 0px 0;
+}
+.th2 {
+  border-radius: 0px 10px 0px 0px;
 }
 .table th {
   font-size: 1.2rem;
@@ -42,6 +44,7 @@
   height: 25px;
   margin-right: 10px;
 }
+
 .symbol span {
   font-weight: 500;
   font-size: 0.8rem;

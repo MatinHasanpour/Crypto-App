@@ -1,33 +1,42 @@
 import React, { useState } from "react";
+import style from "./pagination.module.css";
 
-function Pagination() {
-  const [page, setPage] = useState(1);
-
+function Pagination({ page, setPage }) {
   const previousHandler = () => {
     if (page <= 1) return;
     setPage((page) => page - 1);
   };
 
   const NextHandler = () => {
-    if (page >= 10) return;
+    if (page >= 12) return;
     setPage((page) => page + 1);
   };
 
   return (
-    <div>
-      <button onClick={previousHandler}>Previous</button>
-      <p>1</p>
-      <p>2</p>
+    <div className={style.pagination}>
+      <button
+        onClick={previousHandler}
+        className={page === 1 ? style.disabled : null}
+      >
+        Previous
+      </button>
+      <p className={page === 1 ? style.selected : null}>1</p>
+      <p className={page === 2 ? style.selected : null}>2</p>
       <span>...</span>
-      {page > 2 && page < 9 && (
+      {page > 2 && page < 11 && (
         <>
-          <p>{page}</p>
+          <p className={style.selected}>{page}</p>
           <span>...</span>
         </>
       )}
-      <p>9</p>
-      <p>10</p>
-      <button onClick={NextHandler}>Next</button>
+      <p className={page === 11 ? style.selected : null}>11</p>
+      <p className={page === 12 ? style.selected : null}>12</p>
+      <button
+        onClick={NextHandler}
+        className={page === 12 ? style.disabled : null}
+      >
+        Next
+      </button>
     </div>
   );
 }

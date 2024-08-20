@@ -1,11 +1,12 @@
 import { RotatingLines } from "react-loader-spinner";
 
+import { marketChart } from "../../services/CryptoApi";
 import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
 
 import style from "./TaleCoin.module.css";
 
-function TableCoin({ coins, isLoading }) {
+function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
     <div className={style.container}>
       {isLoading ? (
@@ -24,7 +25,12 @@ function TableCoin({ coins, isLoading }) {
           </thead>
           <tbody>
             {coins.map((coin) => (
-              <TableRow coin={coin} key={coin.id} />
+              <TableRow
+                currency={currency}
+                coin={coin}
+                key={coin.id}
+                setChart={setChart}
+              />
             ))}
           </tbody>
         </table>
@@ -36,7 +42,10 @@ function TableCoin({ coins, isLoading }) {
 export default TableCoin;
 
 const TableRow = ({
+  currency,
+
   coin: {
+    id,
     image,
     name,
     symbol,
@@ -44,11 +53,22 @@ const TableRow = ({
     total_volume,
     price_change_percentage_24h: price_change,
   },
+  setChart,
 }) => {
+  const showHandler = async () => {
+    try {
+      const res = await fetch(marketChart(id));
+      const json = await res.json();
+      console.log(json);
+      setChart(json);
+    } catch (error) {
+      setChart(null);
+    }
+  };
   return (
     <tr>
       <td>
-        <div className={style.symbol}>
+        <div className={style.symbol} onClick={showHandler}>
           <img src={image} alt="" />
           <span>
             <span className={style.colors}>{symbol.toUpperCase()}</span>/USDT
@@ -57,8 +77,8 @@ const TableRow = ({
       </td>
       <td className={style.name}> {name} </td>
       <td className={price_change > 0 ? style.priceSuccess : style.priceError}>
-        {" "}
-        ${current_price.toLocaleString()}{" "}
+        {currency === "usd" ? <span> $ </span> : <span> € </span>}
+        {current_price.toLocaleString()}{" "}
       </td>
       <td>
         <button className={price_change > 0 ? style.success : style.error}>
